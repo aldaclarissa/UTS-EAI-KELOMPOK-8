@@ -36,6 +36,16 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                 padding: 32px 28px 24px 28px;
                 max-width: 1100px;
                 margin: 32px auto 0 auto;
+                overflow-x: auto;
+            }
+            .inquiry-card table {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                box-sizing: border-box;
+                border-radius: 12px;
+                overflow: hidden;
+                background: #fff;
             }
             form#addForm {
                 display: flex;
@@ -289,7 +299,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
         <div class="inquiry-card">
             <h2><i class="fas fa-comments me-2"></i>Daftar Inquiries</h2>
             <form id="addForm">
-                <input type="text" name="nama_customer" placeholder="Nama Customer" required>
+                <input type="text" name="nama_nasabah" placeholder="Nama Nasabah" required>
                 <input type="text" name="no_telp" placeholder="No Telp" required>
                 <input type="text" name="alamat" placeholder="Alamat" required>
                 <select name="subject" id="add_subject" required>
@@ -308,56 +318,58 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                 <input type="text" name="pertanyaan" placeholder="Pertanyaan" required>
                 <button type="submit"><i class="fas fa-plus"></i> Tambah Inquiry</button>
             </form>
-            <table>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Customer</th>
-                    <th>No Telp</th>
-                    <th>Alamat</th>
-                    <th>Subject</th>
-                    <th>Pertanyaan</th>
-                    <th>Status</th>
-                    <th class="waktu-col" style="display:none;">Dibuat Pada</th>
-                    <th class="waktu-col" style="display:none;">Diperbarui Pada</th>
-                    <th>Jawaban Admin</th>
-                    <th>Aksi</th>
-                </tr>
-                <tbody id="inquiryTable">
-                <?php $no=1; foreach($rows as $row): ?>
-                    <tr data-id="<?= $row['id'] ?>">
-                        <td><?= $no++ ?></td>
-                        <td class="nama_customer"><?= htmlspecialchars($row['nama_customer']) ?></td>
-                        <td class="no_telp"><?= htmlspecialchars($row['no_telp']) ?></td>
-                        <td class="alamat"><?= htmlspecialchars($row['alamat']) ?></td>
-                        <td class="subject"><?= htmlspecialchars($row['subject']) ?></td>
-                        <td class="pertanyaan"><?= htmlspecialchars($row['pertanyaan']) ?></td>
-                        <td class="status"><?= htmlspecialchars($row['status']) ?></td>
-                        <td class="dibuat_pada waktu-col" style="display:none;"><?= htmlspecialchars($row['dibuat_pada']) ?></td>
-                        <td class="diperbarui_pada waktu-col" style="display:none;"><?= htmlspecialchars($row['diperbarui_pada']) ?></td>
-                        <td class="jawaban_admin">
-                        <?php
-                        if ($_SESSION['role'] === 'nasabah' && $row['status'] === 'diproses') {
-                            echo '<a href="support_tickets.php?id_pertanyaan=' . $row['id'] . '" class="btn btn-info btn-sm"><i class="fas fa-ticket-alt"></i> Lihat Ticket</a>';
-                        } else {
-                            echo htmlspecialchars($row['jawaban_admin'] ?? '');
-                        }
-                        ?>
-                        </td>
-                        <td>
-                            <button class="edit"><i class="fas fa-pen"></i> Edit</button>
-                            <button class="delete"><i class="fas fa-trash"></i> Hapus</button>
-                        </td>
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Nasabah</th>
+                        <th>No Telp</th>
+                        <th>Alamat</th>
+                        <th>Subject</th>
+                        <th>Pertanyaan</th>
+                        <th>Status</th>
+                        <th class="waktu-col" style="display:none;">Dibuat Pada</th>
+                        <th class="waktu-col" style="display:none;">Diperbarui Pada</th>
+                        <th>Jawaban Admin</th>
+                        <th>Aksi</th>
                     </tr>
-                <?php endforeach ?>
-                </tbody>
-            </table>
+                    <tbody id="inquiryTable">
+                    <?php $no=1; foreach($rows as $row): ?>
+                        <tr data-id="<?= $row['id'] ?>">
+                            <td><?= $no++ ?></td>
+                            <td class="nama_nasabah"><?= htmlspecialchars(isset($row['nama_nasabah']) ? $row['nama_nasabah'] : (isset($row['nama_customer']) ? $row['nama_customer'] : '')) ?></td>
+                            <td class="no_telp"><?= htmlspecialchars($row['no_telp']) ?></td>
+                            <td class="alamat"><?= htmlspecialchars($row['alamat']) ?></td>
+                            <td class="subject"><?= htmlspecialchars($row['subject']) ?></td>
+                            <td class="pertanyaan"><?= htmlspecialchars($row['pertanyaan']) ?></td>
+                            <td class="status"><?= htmlspecialchars($row['status']) ?></td>
+                            <td class="dibuat_pada waktu-col" style="display:none;"><?= htmlspecialchars($row['dibuat_pada']) ?></td>
+                            <td class="diperbarui_pada waktu-col" style="display:none;"><?= htmlspecialchars($row['diperbarui_pada']) ?></td>
+                            <td class="jawaban_admin">
+                            <?php
+                            if ($_SESSION['role'] === 'nasabah' && $row['status'] === 'diproses') {
+                                echo '<a href="support_tickets.php?id_pertanyaan=' . $row['id'] . '" class="btn btn-info btn-sm"><i class="fas fa-ticket-alt"></i> Lihat Ticket</a>';
+                            } else {
+                                echo htmlspecialchars($row['jawaban_admin'] ?? '');
+                            }
+                            ?>
+                            </td>
+                            <td>
+                                <button class="edit"><i class="fas fa-pen"></i> Edit</button>
+                                <button class="delete"><i class="fas fa-trash"></i> Hapus</button>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
             <div id="editModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
                 <form id="editForm" style="background:#fff;padding:28px 28px 16px 28px;border-radius:12px;max-width:420px;margin:auto;color:#222;box-shadow:0 4px 24px rgba(0,0,0,0.13);">
                     <h4 style="color:#003580;"><i class="fas fa-pen me-2"></i>Edit Inquiry</h4>
                     <input type="hidden" name="id" id="edit_id">
                     <div>
-                        <label for="edit_nama_customer" style="font-weight:500;font-size:0.98em;">Nama Customer</label>
-                        <input type="text" name="nama_customer" id="edit_nama_customer" placeholder="Nama Customer" required>
+                        <label for="edit_nama_nasabah" style="font-weight:500;font-size:0.98em;">Nama Nasabah</label>
+                        <input type="text" name="nama_nasabah" id="edit_nama_nasabah" placeholder="Nama Nasabah" required>
                     </div>
                     <div>
                         <label for="edit_no_telp" style="font-weight:500;font-size:0.98em;">No Telp</label>
@@ -408,7 +420,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
         <script>
         document.getElementById('addForm').onsubmit = async function(e) {
             e.preventDefault();
-            const nama_customer = this.nama_customer.value;
+            const nama_nasabah = this.nama_nasabah.value;
             const no_telp = this.no_telp.value;
             const alamat = this.alamat.value;
             const subject = this.subject.value;
@@ -416,7 +428,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             await fetch('customer_inquiries.php', {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({nama_customer, no_telp, alamat, subject, pertanyaan})
+                body: JSON.stringify({nama_nasabah, no_telp, alamat, subject, pertanyaan})
             });
             location.reload();
         };
@@ -424,7 +436,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             btn.onclick = function() {
                 const tr = this.closest('tr');
                 document.getElementById('edit_id').value = tr.dataset.id;
-                document.getElementById('edit_nama_customer').value = tr.querySelector('.nama_customer').textContent;
+                document.getElementById('edit_nama_nasabah').value = tr.querySelector('.nama_nasabah').textContent;
                 document.getElementById('edit_no_telp').value = tr.querySelector('.no_telp').textContent;
                 document.getElementById('edit_alamat').value = tr.querySelector('.alamat').textContent;
                 document.getElementById('edit_subject').value = tr.querySelector('.subject').textContent;
@@ -452,14 +464,14 @@ if ($method === 'GET' && !isset($_GET['id'])) {
         document.getElementById('editForm').onsubmit = async function(e) {
             e.preventDefault();
             const id = document.getElementById('edit_id').value;
-            const nama_customer = document.getElementById('edit_nama_customer').value;
+            const nama_nasabah = document.getElementById('edit_nama_nasabah').value;
             const no_telp = document.getElementById('edit_no_telp').value;
             const alamat = document.getElementById('edit_alamat').value;
             const subject = document.getElementById('edit_subject').value;
             const pertanyaan = document.getElementById('edit_pertanyaan').value;
             const status = document.getElementById('edit_status').value;
             const jawaban_admin = document.getElementById('edit_jawaban_admin').value;
-            let body = {id, nama_customer, no_telp, alamat, subject, pertanyaan, status};
+            let body = {id, nama_nasabah, no_telp, alamat, subject, pertanyaan, status};
             // Hanya admin yang boleh mengirim jawaban_admin
             await fetch('../get_user_info.php').then(r=>r.json()).then(data=>{
                 if(data.role==='admin' && jawaban_admin) body.jawaban_admin = jawaban_admin;
@@ -518,10 +530,10 @@ switch ($method) {
 
     case 'POST':
         $data = json_decode(file_get_contents('php://input'), true);
-        $stmt = $db->prepare("INSERT INTO pertanyaan (id_user, nama_customer, no_telp, alamat, subject, pertanyaan, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO pertanyaan (id_user, nama_nasabah, no_telp, alamat, subject, pertanyaan, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $_SESSION['user_id'],
-            $data['nama_customer'],
+            $data['nama_nasabah'],
             $data['no_telp'],
             $data['alamat'],
             $data['subject'],
@@ -540,9 +552,9 @@ switch ($method) {
         }
         $updateFields = [];
         $params = [];
-        if (isset($data['nama_customer'])) {
-            $updateFields[] = "nama_customer = ?";
-            $params[] = $data['nama_customer'];
+        if (isset($data['nama_nasabah'])) {
+            $updateFields[] = "nama_nasabah = ?";
+            $params[] = $data['nama_nasabah'];
         }
         if (isset($data['no_telp'])) {
             $updateFields[] = "no_telp = ?";

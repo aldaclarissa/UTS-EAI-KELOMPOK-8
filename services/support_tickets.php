@@ -164,7 +164,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             <div class="card mb-3">
                 <div class="card-header">Data Inquiry</div>
                 <div class="card-body">
-                    <b>Nama Customer:</b> <?= htmlspecialchars($inquiry['nama_customer'] ?? '-') ?><br>
+                    <b>Nama Nasabah:</b> <?= htmlspecialchars($inquiry['nama_customer'] ?? '-') ?><br>
                     <b>Pertanyaan:</b> <?= htmlspecialchars($inquiry['pertanyaan'] ?? '-') ?><br>
                     <b>Status Inquiry:</b> <?= htmlspecialchars($inquiry['status'] ?? '-') ?><br>
                 </div>
@@ -467,7 +467,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                         </option>
                     <?php endforeach ?>
                 </select>
-                <input type="text" name="nama_customer" id="add_nama_customer" placeholder="Nama Customer" readonly style="min-width:160px;">
+                <input type="text" name="nama_nasabah" id="add_nama_nasabah" placeholder="Nama Nasabah" readonly style="min-width:160px;">
                 <input type="text" name="keluhan" id="add_keluhan" placeholder="Keluhan" style="min-width:180px;" required>
                 <input type="text" name="tanggapan" id="add_tanggapan" placeholder="Tanggapan" style="min-width:180px;">
                 <select name="status" id="add_status" required style="min-width:120px;">
@@ -480,7 +480,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             <table>
                 <tr>
                     <th>No</th>
-                    <th>Nama Customer</th>
+                    <th>Nama Nasabah</th>
                     <th>Keluhan</th>
                     <th>Tanggapan</th>
                     <th>Status</th>
@@ -489,10 +489,10 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                 <tbody id="ticketTable">
                 <?php $no=1; foreach($rows as $row): ?>
                     <?php
-                        $nama_customer = '';
+                        $nama_nasabah = '';
                         foreach ($inquiryList as $inq) {
                             if ($inq['id'] == $row['id_pertanyaan']) {
-                                $nama_customer = $inq['nama_customer'];
+                                $nama_nasabah = $inq['nama_customer'];
                                 break;
                             }
                         }
@@ -501,7 +501,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                     ?>
                     <tr data-id="<?= $row['id'] ?>" data-id_pertanyaan="<?= $row['id_pertanyaan'] ?>">
                         <td><?= $no++ ?></td>
-                        <td class="nama_customer"><?= htmlspecialchars($nama_customer) ?></td>
+                        <td class="nama_nasabah"><?= htmlspecialchars($nama_nasabah) ?></td>
                         <td class="keluhan"><?= htmlspecialchars($keluhan) ?></td>
                         <td class="tanggapan"><?= htmlspecialchars($row['tanggapan'] ?? '') ?></td>
                         <td class="status"><?= htmlspecialchars($row['status']) ?></td>
@@ -519,9 +519,9 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                     <h4 id="modalTitle"><i class="fas fa-pen me-2"></i>Edit Ticket</h4>
                     <input type="hidden" name="id" id="ticket_id">
                     <div>
-                        <label for="ticket_id_pertanyaan" style="font-weight:500;font-size:0.98em;">Nama Customer</label>
+                        <label for="ticket_id_pertanyaan" style="font-weight:500;font-size:0.98em;">Nama Nasabah</label>
                         <select name="id_pertanyaan" id="ticket_id_pertanyaan" required>
-                            <option value="">Pilih Customer</option>
+                            <option value="">Pilih Nasabah</option>
                             <?php foreach($inquiryList as $inq): ?>
                                 <option value="<?= $inq['id'] ?>"><?= htmlspecialchars($inq['nama_customer']) ?></option>
                             <?php endforeach ?>
@@ -560,12 +560,12 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                 // Otomatis isi nama customer dari inquiry yang dipilih
                 document.getElementById('add_id_pertanyaan').onchange = function() {
                     const selected = this.options[this.selectedIndex];
-                    document.getElementById('add_nama_customer').value = selected.getAttribute('data-nama') || '';
+                    document.getElementById('add_nama_nasabah').value = selected.getAttribute('data-nama') || '';
                 };
                 // Set nama customer pertama kali
                 document.getElementById('add_id_pertanyaan').dispatchEvent(new Event('change'));
             } else {
-                document.getElementById('add_nama_customer').style.display='none';
+                document.getElementById('add_nama_nasabah').style.display='none';
                 document.getElementById('add_keluhan').style.display='none';
             }
         });

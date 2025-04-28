@@ -290,7 +290,7 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             <!-- Inline Add Feedback Form -->
             <form id="addFeedbackForm" style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
                 <select name="id_pelanggan" id="add_id_pelanggan" required style="min-width:160px;">
-                    <option value="">Nama Customer</option>
+                    <option value="">Nama Nasabah</option>
                     <?php foreach($inquiryList as $inq): ?>
                         <option value="<?= $inq['id'] ?>"><?= htmlspecialchars($inq['nama_customer']) ?></option>
                     <?php endforeach ?>
@@ -304,8 +304,8 @@ if ($method === 'GET' && !isset($_GET['id'])) {
             <table>
                 <tr>
                     <th>No</th>
-                    <th>Nama Customer</th>
-                    <th>Keluhan Pelanggan</th>
+                    <th>Nama Nasabah</th>
+                    <th>Keluhan Nasabah</th>
                     <th>Penilaian</th>
                     <th>Komentar</th>
                     <th>Aksi</th>
@@ -353,9 +353,9 @@ if ($method === 'GET' && !isset($_GET['id'])) {
                     <h4 id="modalTitle"><i class="fas fa-pen me-2"></i>Edit Feedback</h4>
                     <input type="hidden" name="id" id="feedback_id">
                     <div>
-                        <label for="feedback_id_pelanggan" style="font-weight:500;font-size:0.98em;">Nama Customer</label>
+                        <label for="feedback_id_pelanggan" style="font-weight:500;font-size:0.98em;">Nama Nasabah</label>
                         <select name="id_pelanggan" id="feedback_id_pelanggan" required style="width:100%;margin-bottom:8px;">
-                            <option value="">Pilih Customer</option>
+                            <option value="">Pilih Nasabah</option>
                             <?php foreach($inquiryList as $inq): ?>
                                 <option value="<?= $inq['id'] ?>"><?= htmlspecialchars($inq['nama_customer']) ?></option>
                             <?php endforeach ?>
