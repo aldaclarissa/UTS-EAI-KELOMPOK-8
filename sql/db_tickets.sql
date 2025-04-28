@@ -3,7 +3,7 @@ USE db_tickets;
 
 CREATE TABLE IF NOT EXISTS tickets (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_pertanyaan INT NOT NULL,
+    id_nasabah INT NOT NULL,
     keluhan TEXT,
     status ENUM('terbuka', 'diproses', 'ditutup') DEFAULT 'terbuka',
     tanggapan TEXT,

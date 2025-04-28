@@ -3,7 +3,7 @@ USE db_feedbacks;
 
 CREATE TABLE IF NOT EXISTS feedbacks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_pelanggan INT NOT NULL,
+    id_nasabah INT NOT NULL,
     id_tiket INT NOT NULL,
     penilaian INT CHECK (penilaian >= 1 AND penilaian <= 5),
     komentar TEXT,

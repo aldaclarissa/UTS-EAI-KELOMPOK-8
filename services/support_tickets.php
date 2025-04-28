@@ -194,9 +194,13 @@ if ($method === 'GET' && !isset($_GET['id'])) {
         // Ambil id pertanyaan milik nasabah
         $inquiryIds = array_column($inquiryList, 'id');
         $inquiryIdsStr = implode(',', array_map('intval', $inquiryIds));
-        $stmt = $db->query("SELECT * FROM tickets WHERE id_pertanyaan IN ($inquiryIdsStr) ORDER BY id DESC");
+        if (empty($inquiryIdsStr)) {
+            $rows = [];
+        } else {
+            $stmt = $db->query("SELECT * FROM tickets WHERE id_pertanyaan IN ($inquiryIdsStr) ORDER BY id DESC");
+            $rows = $stmt ? $stmt->fetchAll() : [];
+        }
     }
-    $rows = $stmt ? $stmt->fetchAll() : [];
     if (!$stmt) {
         echo "<div style='color:red'>Query error: " . implode(' ', $db->errorInfo()) . "</div>";
     }
