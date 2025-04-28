@@ -1,10 +1,10 @@
-# Bank Service SOA Implementation
+# Bank Service SOA Impementation
 
-## Overview
-This project implements a Service-Oriented Architecture (SOA) for a bank service system. The system consists of multiple microservices that handle different aspects of bank operations, including customer inquiries, support tickets, and user feedback.
+# Overview
+Project ini merupakan implementasi dari Servis-Oriented Architecture (SOA) untuk sistem layanan bank. Sistem ini terdiri dari beberapa microservices yang menangani berbagai aspek operasi bank, termasuk pertanyaan pelanggan, tiket dukungan, dan umpan balik pengguna.
 
-## Project Structure
-```
+
+# Struktur Projek
 TugasUTSKel8/
 ├── config/
 │   ├── db_feedbacks.php
@@ -18,122 +18,97 @@ TugasUTSKel8/
 ├── login.php
 ├── logout.php
 └── session_check.php
-```
 
 ## Services
 
 ### 1. Customer Inquiries Service (`customer_inquiries.php`)
-- **Purpose**: Handles customer inquiries and questions
+- **Purpose**: Menangani pertanyaan dan konsultasi dari pelanggan
 - **Operations**:
-  - GET: Retrieve all inquiries or a specific inquiry by ID
-  - POST: Create a new inquiry
-  - PUT: Update an existing inquiry
-  - DELETE: Remove an inquiry
+  - GET: Mengambil semua pertanyaan atau pertanyaan spesifik berdasarkan ID
+  - POST: Membuat pertanyaan baru
+  - PUT: Memperbarui
+  - DELETE: Menghapus Pertanyaan
 
 ### 2. Support Tickets Service (`support_tickets.php`)
-- **Purpose**: Manages support tickets for customer issues
+- **Purpose**: Mengelola tiket dukungan untuk permasalahan pelanggan 
 - **Operations**:
-  - GET: View all tickets or a specific ticket
-  - POST: Create a new support ticket
-  - PUT: Update ticket status and information
-  - DELETE: Remove a ticket
+  - GET: Melihat semua tiket atau tiket spesifik
+  - POST: Membuat tiket dukungan baru
+  - PUT: Memperbarui status dan informasi tiket
+  - DELETE: Menghapus tiket
 
 ### 3. User Feedbacks Service (`user_feedbacks.php`)
-- **Purpose**: Handles customer feedback and ratings
+- **Purpose**: Menangani umpan balik dan penilaian dari pelanggan
 - **Operations**:
-  - GET: View all feedbacks or a specific feedback
-  - POST: Submit new feedback
-  - PUT: Update existing feedback
-  - DELETE: Remove feedback
+  - GET: Melihat semua umpan balik atau umpan balik spesifik
+  - POST: Mengirimkan umpan balik baru
+  - PUT: Memperbaiki umpan balik yang ada
+  - DELETE: Menghapus umpan balik
 
-## Database Structure
+
+## Database StructureStruktur basis data
 
 ### 1. Customer Inquiries Database (`db_inquiries`)
-- Stores customer inquiries and questions
+- Menyimpan pertanyaan dan konsultasi dari pelanggan
 - Tables:
-  - `pertanyaan`: Customer inquiries
-  - `users`: User authentication and roles
+  - `pertanyaan`: Menyimoan oertanyaan
+  - `users`: Menyimpan data authentikasi pengguna dan peran pengguna
 
 ### 2. Support Tickets Database (`db_tickets`)
-- Manages support tickets
+- Mengelola data tiket dukungan pelanggan
 - Tables:
-  - `tickets`: Support ticket information
-  - `users`: User authentication and roles
+  - `tickets`: menyimpan informasi tiket "dukungan/support"
+  - `users`: Menyimoan data autentikasi pengguna dan peran pengguna
 
 ### 3. Feedback Database (`db_feedbacks`)
-- Stores customer feedback
+- Menyimpan data umpan balik pelanggan
 - Tables:
-  - `feedbacks`: Customer feedback and ratings
-  - `users`: User authentication and roles
+  - `feedbacks`: Menyimpan data umpan balik dan penilaian pelanggan
+  - `users`: MEnyimpan data autentikai pengguna dan peran pengguna
 
 ## Authentication Flow
-1. User logs in through `login.php`
-2. Session is created and stored
-3. `session_check.php` validates user session for each request
-4. User logs out through `logout.php`
+1. pengguna login melalui `login.php`
+2. Sesi (session) dibuat dan sisimpan
+3. `session_check.php` memvalidasi sesi pengguna untuk setiap permintaan
+4. pengguna logout melalui `logout.php`
 
 ## Service Flow
 
 ### Customer Inquiry Flow
-1. Customer submits an inquiry through the inquiries service
-2. Inquiry is stored in the inquiries database
-3. Support staff can view and respond to inquiries
+1. Pelanggan mengirimkan pertanyaan melalui layanan pertanyaan 
+2. Pertanyaan disimpan dalam basis data pertanyaan
+3. Staff dukungan dapat melihat dan merespon pertanyaan
 
 ### Support Ticket Flow
-1. Support staff creates a ticket based on customer inquiry
-2. Ticket is stored in the tickets database
-3. Ticket status can be updated as the issue is resolved
+1. Staf support/dukungan membua tiket berdasarkan pertanyaan pelanggan 
+2. Pertanyaan disimpan dalam basis data pertanyaan
+3. Staf dukungan dapat melihat dan merespon pertanyaan
 
 ### Feedback Flow
-1. Customer submits feedback after ticket resolution
-2. Feedback is stored in the feedback database
-3. System administrators can view and manage feedback
+1. Pelanggan memberikan umpan balik setelah penyelesaian tiket
+2. Umpan balik disimpan dalam basis data tiket
+3. Administrator sistem dapat diperbarui selama penyelesaian masalah
 
 ## API Endpoints
 
 ### Customer Inquiries
-- `GET /services/customer_inquiries.php` - List all inquiries
-- `GET /services/customer_inquiries.php?id={id}` - Get specific inquiry
-- `POST /services/customer_inquiries.php` - Create new inquiry
-- `PUT /services/customer_inquiries.php` - Update inquiry
-- `DELETE /services/customer_inquiries.php` - Delete inquiry
+- `GET /services/customer_inquiries.php` - Menampilkan semua pertanyaan
+- `GET /services/customer_inquiries.php?id={id}` - Menampilkan pertanyaan spesifik
+- `POST /services/customer_inquiries.php` - membuat pertanyaan baru
+- `PUT /services/customer_inquiries.php` - memperbarui pertanyaan
+- `DELETE /services/customer_inquiries.php` - Menghapus pertanyaan
 
 ### Support Tickets
-- `GET /services/support_tickets.php` - List all tickets
-- `GET /services/support_tickets.php?id={id}` - Get specific ticket
-- `POST /services/support_tickets.php` - Create new ticket
-- `PUT /services/support_tickets.php` - Update ticket
-- `DELETE /services/support_tickets.php` - Delete ticket
+- `GET /services/support_tickets.php` - Menampilkan semua tiket
+- `GET /services/support_tickets.php?id={id}` - Menampilkan tiket spesifik
+- `POST /services/support_tickets.php` - Membuat tiket baru
+- `PUT /services/support_tickets.php` - Memperbarui tiket
+- `DELETE /services/support_tickets.php` - Menghapus tiket
 
 ### User Feedbacks
-- `GET /services/user_feedbacks.php` - List all feedbacks
-- `GET /services/user_feedbacks.php?id={id}` - Get specific feedback
-- `POST /services/user_feedbacks.php` - Create new feedback
-- `PUT /services/user_feedbacks.php` - Update feedback
-- `DELETE /services/user_feedbacks.php` - Delete feedback
+- `GET /services/user_feedbacks.php` - Menampilkan semua umpan balik
+- `GET /services/user_feedbacks.php?id={id}` - Menampilkan umpan balik spesifik
+- `POST /services/user_feedbacks.php` - Menampilkan umpan balik spesifik
+- `PUT /services/user_feedbacks.php` - Memperbarui feedback
+- `DELETE /services/user_feedbacks.php` - menghapus feedback
 
-## Security Features
-- Session-based authentication
-- Role-based access control (Admin, Support Staff, Customer)
-- Input validation and sanitization
-- Secure database connections
-
-## Setup Instructions
-1. Configure database connections in the `config/` directory
-2. Set up the required databases and tables
-3. Configure web server to point to the project directory
-4. Ensure PHP session handling is properly configured
-5. Set appropriate file permissions
-
-## Dependencies
-- PHP 7.4 or higher
-- MySQL/MariaDB
-- Web server (Apache/Nginx)
-- PDO PHP Extension
-- Session PHP Extension
-
-## Error Handling
-- Each service implements proper error handling
-- HTTP status codes are used appropriately
-- Error messages are logged and returned in JSON format
-- Database errors are caught and handled gracefully 
