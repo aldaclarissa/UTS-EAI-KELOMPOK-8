@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Service System - Banking</title>
+  
+  <!-- Bootstrap & Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+      padding-top: 40px;
+    }
+    .navbar {
+      background-color: #003580;
+      padding: 0.75rem 1rem;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    #userInfo {
+      color: #fff;
+      margin-right: 16px;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .btn-logout {
+      background-color: #e53935;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+    .btn-logout:hover {
+      background-color: #c62828;
+    }
+    .hero-section {
+      padding: 24px 0;
+      background: #e3ebf6;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .hero-content img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .hero-text {
+      max-width: 550px;
+    }
+    .hero-text h2 {
+      color: #003580;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .card {
+      border: none;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+    .card-body {
+      padding: 30px;
+    }
+    .card-title {
+      color: #003580;
+      font-weight: 600;
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+    .card-text {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      background-color: #0056b3;
+      border: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 8px 20px;
+      border-radius: 8px;
+    }
+    .btn-primary:hover {
+      background-color: #004494;
+    }
+    .icon {
+      font-size: 2.8rem;
+      color: #0056b3;
+    }
+    footer {
+      background-color: #003580;
+      color: #ffffff;
+      text-align: center;
+      padding: 16px 0;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text {
+        max-width: 100%;
+      }
+      .hero-content img {
+        max-width: 100%;
+      }
+    }
+
+    main.container.mt-5 {
+      margin-top: 0 !important;
+      margin-bottom: 40px;
+    }
+  </style>
+
+  <script>
+    // Cek session via AJAX
+    fetch('session_check.php').then(r => {
+      if (!r.ok) window.location = 'login.php';
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fas fa-building-columns me-2"></i>Bank Service</a>
+      <div class="d-flex align-items-center">
+        <span id="userInfo"></span>
+        <a href="logout.php" class="btn btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div style="flex: 1; display: flex; justify-content: flex-start;">
+          <img src="ilustrasi-bank-atau-perbankan_169.jpeg" alt="Banking Illustration">
+        </div>
+        <div class="hero-text" style="flex: 1;">
+          <h2>Sistem Layanan Pelanggan Perbankan</h2>
+          <p>Kami menghadirkan platform layanan pelanggan perbankan yang modern dan terintegrasi. 
+          Sistem ini mencakup fitur <strong>Customer Inquiries</strong> untuk menangani pertanyaan pelanggan secara cepat, 
+          <strong>Support Tickets</strong> untuk mendokumentasikan serta menyelesaikan masalah atau keluhan nasabah dengan profesional, 
+          serta <strong>User Feedback</strong> untuk mengumpulkan dan menganalisis umpan balik pelanggan demi peningkatan layanan. 
+          Semua dirancang untuk memastikan pengalaman pelanggan yang responsif, aman, dan terpercaya.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Section -->
+  <main class="container mt-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body d-flex flex-column align-items-center">
+            <i class="fas fa-comments icon"></i>
+            <h5 class="card-title">Customer Inquiries</h5>
+            <p class="card-text">Kelola semua pertanyaan pelanggan dengan cepat dan efektif melalui sistem kami.</p>
+            <a href="services/customer_inquiries.php" class="btn btn-primary">Buka Inquiries</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body d-flex flex-column align-items-center">
+            <i class="fas fa-ticket-alt icon"></i>
+            <h5 class="card-title">Support Tickets</h5>
+            <p class="card-text">Pantau dan selesaikan tiket support pelanggan secara terorganisir dan profesional.</p>
+            <a href="services/support_tickets.php" class="btn btn-primary">Buka Tickets</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body d-flex flex-column align-items-center">
+            <i class="fas fa-star icon"></i>
+            <h5 class="card-title">User Feedback</h5>
+            <p class="card-text">Kumpulkan dan tindaklanjuti feedback pelanggan untuk meningkatkan kualitas layanan.</p>
+            <a href="services/user_feedbacks.php" class="btn btn-primary">Buka Feedback</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Customer Service System | All Rights Reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Tampilkan username dan role
+    fetch('get_user_info.php')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('userInfo').innerHTML = `<i class='fas fa-user-circle me-1'></i> ${data.username} (${data.role})`;
+      });
+  </script>
+
+</body>
+</html>
